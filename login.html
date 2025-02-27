@@ -179,14 +179,14 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
     <script>
-        // Firebase Configuration
+    
         const firebaseConfig = {
-            apiKey: "AIzaSyCWRYvmoVCs5a9Uw_S_G-UFPb_a6X1Kyzw",
-            authDomain: "zombiewsss.firebaseapp.com",
-            projectId: "zombiewsss"
+            apiKey: "",
+            authDomain: "",
+            projectId: ""
         };
 
-        // Initialize Firebase
+     
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
@@ -199,21 +199,21 @@
             const password = document.getElementById('password').value;
 
             try {
-                // Create user or sign in
+               
                 const userCredential = await auth.createUserWithEmailAndPassword(email, password);
                 
-                // Store additional user info in Firestore
+               
                 await db.collection('players').doc(userCredential.user.uid).set({
                     username: username,
                     email: email,
                     createdAt: firebase.firestore.FieldValue.serverTimestamp()
                 });
 
-                // Redirect to game
+              
                 window.location.href = 'game.html';
             } catch (error) {
                 if (error.code === 'auth/email-already-in-use') {
-                    // If user exists, try signing in
+               
                     try {
                         await auth.signInWithEmailAndPassword(email, password);
                         window.location.href = 'game.html';
